@@ -10,28 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_07_000805) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_07_203825) do
   create_table "comments", force: :cascade do |t|
-    t.text "body"
-    t.integer "feature_id", null: false
+    t.integer "feature_id"
+    t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["feature_id"], name: "index_comments_on_feature_id"
   end
 
   create_table "features", force: :cascade do |t|
-    t.string "external_id"
-    t.decimal "mag"
-    t.string "place"
-    t.string "time"
-    t.string "url"
+    t.string "external_id", null: false
+    t.decimal "magnitude", precision: 5, scale: 2, null: false
+    t.string "place", null: false
+    t.string "mag_type", null: false
+    t.string "title", null: false
     t.boolean "tsunami"
-    t.string "mag_type"
-    t.string "title"
-    t.decimal "longitude"
-    t.decimal "latitude"
+    t.string "url"
+    t.float "longitude", null: false
+    t.float "latitude", null: false
+    t.datetime "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["external_id"], name: "index_features_on_external_id", unique: true
   end
 
   add_foreign_key "comments", "features"
