@@ -25,7 +25,14 @@ class Api::FeaturesController < ApplicationController
       return
     end
 
-    render json: features, each_serializer: FeatureSerializer, status: :ok
+    render json: {
+      data: features.map { |feature| FeatureSerializer.new(feature).as_json },
+      pagination: {
+        current_page: features.current_page,
+        total: features.total_entries,
+        per_page: features.per_page
+      }
+    }, status: :ok
   end
 
   private
