@@ -11,7 +11,7 @@ class FeatureSerializer
         external_id: @feature.external_id,
         magnitude: @feature.magnitude,
         place: @feature.place,
-        time: @feature.time,
+        time: format_time(@feature.time), # Call the format_time method here
         tsunami: @feature.tsunami,
         mag_type: @feature.mag_type,
         title: @feature.title,
@@ -24,5 +24,11 @@ class FeatureSerializer
         external_url: @feature.url
       }
     }
+  end
+
+  private
+
+  def format_time(time)
+    time.strftime("%Y-%m-%d %H:%M:%S") # Format the time as a string
   end
 end

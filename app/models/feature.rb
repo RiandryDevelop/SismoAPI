@@ -1,2 +1,3 @@
 class Feature < ApplicationRecord
-end
+    has_many :comments, dependent: :destroy
+  end

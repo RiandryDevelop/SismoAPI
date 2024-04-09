@@ -16,7 +16,7 @@ class Api::FeaturesController < ApplicationController
     # Paginar los resultados
     begin
       per_page = params[:per_page].to_i
-      per_page = 20 if per_page <= 0 || per_page > 1000 # Default per_page if invalid
+      per_page = 20 if per_page <= 0 || per_page <= 1000 # Default per_page if invalid
 
       # Replace 'page' and 'per' with 'paginate' provided by will_paginate gem
       features = features.paginate(page: params[:page], per_page: per_page)
