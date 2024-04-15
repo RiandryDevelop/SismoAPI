@@ -11,7 +11,6 @@ class Api::CommentsController < ApplicationController
   end
 
   def create
-    # Buscar el feature por su ID
     feature = Feature.find_by(id: params[:feature_id])
 
     unless feature

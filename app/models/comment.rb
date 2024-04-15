@@ -1,4 +1,4 @@
 class Comment < ApplicationRecord
   belongs_to :feature
-  validates :body, uniqueness: true
+  validates :body, presence: true
 end
