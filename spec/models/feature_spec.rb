@@ -9,7 +9,6 @@ RSpec.describe Api::FeaturesController, type: :controller do
         expect(json_response["data"]).to be_an_instance_of(Array)
         expect(json_response["pagination"]).to be_an_instance_of(Hash)
 
-        # Check each attribute type in the response
         json_response["data"].each do |feature|
           expect(feature["id"]).to be_an_instance_of(Integer)
           expect(feature["type"]).to eq("feature")
@@ -27,6 +26,5 @@ RSpec.describe Api::FeaturesController, type: :controller do
       end
     end
 
-    # Add more test cases for other scenarios as needed
   end
 end

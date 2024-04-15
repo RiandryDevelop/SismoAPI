@@ -1,24 +1,24 @@
 namespace :fetch_sismo_data do
   task :fetch => :environment do
-    # URL del feed de USGS para los últimos 30 días
+  
     url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson'
 
     begin
-      # Realizar la solicitud HTTP
+  
       response = RestClient.get(url)
       data = JSON.parse(response.body)
 
-      # Iterate over each feature and save it to the database
+  
       data['features'].each do |feature|
         attributes = feature['properties']
 
-        # Skip if any required fields are empty or null
+  
         next unless attributes['title'] && attributes['url'] && attributes['place'] && attributes['magType'] && feature['geometry']['coordinates'].size >= 2
 
-        # Convert the time attribute to a human-readable date format
-        time = Time.at(attributes['time'] / 1000) # Assuming the timestamp is in milliseconds
+  
+        time = Time.at(attributes['time'] / 1000) 
 
-        # Save the feature to the database
+        
         Feature.create!(
           external_id: feature['id'],
           magnitude: attributes['mag'],
